@@ -6,8 +6,12 @@ import javax.persistence.Persistence;
 
 import org.junit.After;
 import org.junit.AfterClass;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Test;
+
+import com.algaworks.ecommerce.model.Produto;
 
 public class ConsultandoRegistrosTest {
 
@@ -34,4 +38,22 @@ public class ConsultandoRegistrosTest {
 		entityManager.close();
 	}
 	
+	@Test
+	public void buscarPorIdentificador() {
+		Produto produto = entityManager.find(Produto.class, 1);
+		
+		Assert.assertNotNull(produto);
+		Assert.assertEquals("Kindle", produto.getNome());
+	}
+	
+	@Test
+	public void atualizarReferencia() {
+		Produto produto = entityManager.find(Produto.class, 1);
+		produto.setNome("Microfone Samson");
+		
+		entityManager.refresh(produto);
+		
+		Assert.assertEquals("Kindle", produto.getNome());
+	}
+
 }
