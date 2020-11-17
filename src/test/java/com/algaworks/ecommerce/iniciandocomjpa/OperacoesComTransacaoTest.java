@@ -11,6 +11,23 @@ import com.algaworks.ecommerce.model.Produto;
 public class OperacoesComTransacaoTest extends EntityManagerTest {
 	
 	@Test
+	public void atualizarObjetoGerenciado() {
+		Produto produto = entityManager.find(Produto.class, 1);
+		produto.setNome("Kindle Paperwhite 2gen");
+		
+		entityManager.getTransaction().begin();
+		
+		entityManager.merge(produto);
+		
+		entityManager.getTransaction().commit();
+		
+		entityManager.clear();
+		
+		Produto produtoVerificado = entityManager.find(Produto.class, 1);
+		Assert.assertEquals("Kindle Paperwhite 2gen", produtoVerificado.getNome());
+	}
+	
+	@Test
 	public void atualizarObjetoTest() {
 		Produto produto = new Produto();
 		produto.setId(1);
