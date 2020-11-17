@@ -8,13 +8,13 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "cliente")
-public class Cliente {
+@Table(name = "estoque")
+public class Estoque {
 
 	@Id
 	private Integer id;
 	
-	private String nome;
+	private Integer produtoId;
 	
-	private SexoCliente sexo;
+	private Integer quantidade;
 }

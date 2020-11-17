@@ -1,5 +1,7 @@
 package com.algaworks.ecommerce.model;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -8,13 +10,15 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "cliente")
-public class Cliente {
+@Table(name = "nota_fiscal")
+public class NotaFiscal {
 
 	@Id
 	private Integer id;
 	
-	private String nome;
+	private Integer pedidoId;
 	
-	private SexoCliente sexo;
+	private String xml;
+	
+	private Date dataEmissao;
 }
