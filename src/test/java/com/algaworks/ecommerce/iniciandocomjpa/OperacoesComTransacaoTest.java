@@ -11,6 +11,20 @@ import com.algaworks.ecommerce.model.Produto;
 public class OperacoesComTransacaoTest extends EntityManagerTest {
 	
 	@Test
+	public void impedirOperacaoComBancoDedadosTest() {
+		Produto produto = entityManager.find(Produto.class, 1);		
+		entityManager.detach(produto);
+		
+		entityManager.getTransaction().begin();
+		produto.setNome("Kindle Paperwhite 2gen");
+		entityManager.getTransaction().commit();
+		entityManager.clear();
+		
+		Produto produtoVerificado = entityManager.find(Produto.class, 1);
+		Assert.assertEquals("Kindle", produtoVerificado.getNome());
+	}
+	
+	@Test
 	public void mostrarDiferencaPersistMerge() {
 		Produto produtoPersist = new Produto();
 		produtoPersist.setId(5);
