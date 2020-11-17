@@ -2,6 +2,8 @@ package com.algaworks.ecommerce.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -18,6 +20,7 @@ public class PagamentoBoleto {
 	@Column(name = "pedido_id")
 	private Integer pedidoId;
 	
+	@Enumerated(EnumType.STRING)
 	private StatusPagamento status;
 	
 	private String numero;
