@@ -24,7 +24,7 @@ public class MapeamentoObjetoEmbutidoTest extends EntityManagerTest {
 		endereco.setUf("MG");
 		
 		Pedido pedido = new Pedido();
-		pedido.setId(1);
+//		pedido.setId(1); // Comentado por está utilizando a estratégia Identity
 		pedido.setDataPedido(LocalDateTime.now());
 		pedido.setStatus(StatusPedido.AGUARDANDO);
 		pedido.setTotal(new BigDecimal("1000"));
