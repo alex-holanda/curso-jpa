@@ -8,13 +8,15 @@ import org.junit.Test;
 
 import com.algaworks.ecommerce.EntityManagerTest;
 import com.algaworks.ecommerce.model.Cliente;
+import com.algaworks.ecommerce.model.ItemPedido;
 import com.algaworks.ecommerce.model.Pedido;
+import com.algaworks.ecommerce.model.Produto;
 import com.algaworks.ecommerce.model.StatusPedido;
 
 public class RelacionanemtoManyToOneTest extends EntityManagerTest {
 
 	@Test
-	public void verificarRelacionamento() {
+	public void verificarRelacionamentoPedidoCliente() {
 		Cliente cliente = entityManager.find(Cliente.class, 1);
 		
 		Pedido pedido = new Pedido();
@@ -32,5 +34,34 @@ public class RelacionanemtoManyToOneTest extends EntityManagerTest {
 		
 		Pedido pedidoVerificacao = entityManager.find(Pedido.class, pedido.getId());
 		Assert.assertNotNull(pedidoVerificacao.getCliente());
+	}
+	
+	@Test
+	public void verificarRelacionamentoItemPedido() {
+		Produto produto = entityManager.find(Produto.class, 1);
+		Cliente cliente = entityManager.find(Cliente.class, 1);
+		
+		Pedido pedido = new Pedido();
+		pedido.setCliente(cliente);
+		pedido.setDataPedido(LocalDateTime.now());
+		pedido.setStatus(StatusPedido.AGUARDANDO);
+		pedido.setTotal(BigDecimal.TEN);
+		
+		ItemPedido itemPedido = new ItemPedido();
+		itemPedido.setPedido(pedido);
+		itemPedido.setProduto(produto);
+		itemPedido.setPrecoProduto(produto.getPreco());
+		itemPedido.setQuantidade(1);
+		
+		entityManager.getTransaction().begin();
+		entityManager.persist(pedido);
+		entityManager.persist(itemPedido);
+		entityManager.getTransaction().commit();
+		
+		entityManager.clear();
+		
+		ItemPedido itemPedidoVerificacao = entityManager.find(ItemPedido.class, itemPedido.getId());
+		Assert.assertNotNull(itemPedidoVerificacao.getPedido());
+		Assert.assertNotNull(itemPedidoVerificacao.getProduto());
 	}
 }
