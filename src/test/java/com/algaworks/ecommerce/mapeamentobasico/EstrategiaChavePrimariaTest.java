@@ -9,7 +9,7 @@ import com.algaworks.ecommerce.model.Categoria;
 public class EstrategiaChavePrimariaTest extends EntityManagerTest {
 
 	@Test
-	public void testarEstrategiaAutoTest() {
+	public void testarEstrategiaTest() {
 		Categoria categoria = new Categoria();
 		categoria.setNome("Eletrônicos");
 		
