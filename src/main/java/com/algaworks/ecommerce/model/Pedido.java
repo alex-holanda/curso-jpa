@@ -11,6 +11,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -40,5 +42,9 @@ public class Pedido {
 	
 	@Embedded
 	private Endereco endereco;
+	
+	@ManyToOne
+	@JoinColumn(name = "cliente_id")
+	private Cliente cliente;
 	
 }
