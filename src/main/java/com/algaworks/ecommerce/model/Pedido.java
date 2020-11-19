@@ -9,7 +9,6 @@ import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -47,11 +46,11 @@ public class Pedido {
 	@Embedded
 	private Endereco endereco;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name = "cliente_id")
 	private Cliente cliente;
 	
-	@OneToMany(mappedBy = "pedido", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "pedido")
 	private List<ItemPedido> itens;
 	
 	@OneToOne(mappedBy = "pedido")
