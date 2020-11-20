@@ -110,4 +110,8 @@ public class Pedido {
 	public void aoCarregar() {
 		System.out.println("Após carregar o Pedido");
 	}
+	
+	public boolean isPago() {
+		return StatusPedido.PAGO.equals(status);
+	}
 }
