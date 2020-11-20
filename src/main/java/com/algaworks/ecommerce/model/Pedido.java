@@ -55,4 +55,8 @@ public class Pedido {
 	
 	@OneToOne(mappedBy = "pedido")
 	private PagamentoCartao pagamento;
+	
+	public boolean isPago() {
+		return StatusPedido.PAGO.equals(status);
+	}
 }
