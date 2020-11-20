@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
@@ -25,11 +26,15 @@ import javax.persistence.PreRemove;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
+import com.algaworks.ecommerce.listener.GerarNotaFiscalListener;
+import com.algaworks.ecommerce.service.GenericoListener;
+
 import lombok.Data;
 
 @Data
 @Entity
 @Table(name = "pedido")
+@EntityListeners({GerarNotaFiscalListener.class, GenericoListener.class})
 public class Pedido {
 
 	@Id
