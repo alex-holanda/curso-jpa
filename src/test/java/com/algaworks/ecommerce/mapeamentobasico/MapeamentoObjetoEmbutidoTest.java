@@ -1,7 +1,6 @@
 package com.algaworks.ecommerce.mapeamentobasico;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -28,7 +27,6 @@ public class MapeamentoObjetoEmbutidoTest extends EntityManagerTest {
 		
 		Pedido pedido = new Pedido();
 //		pedido.setId(1); // Comentado por está utilizando a estratégia Identity
-		pedido.setDataPedido(LocalDateTime.now());
 		pedido.setStatus(StatusPedido.AGUARDANDO);
 		pedido.setTotal(new BigDecimal("1000"));
 		pedido.setEndereco(endereco);

@@ -1,7 +1,6 @@
 package com.algaworks.ecommerce.relacionamento;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -21,7 +20,6 @@ public class RelacionanemtoManyToOneTest extends EntityManagerTest {
 		
 		Pedido pedido = new Pedido();
 		pedido.setStatus(StatusPedido.AGUARDANDO);
-		pedido.setDataPedido(LocalDateTime.now());
 		pedido.setTotal(BigDecimal.TEN);
 		
 		pedido.setCliente(cliente);
@@ -43,7 +41,6 @@ public class RelacionanemtoManyToOneTest extends EntityManagerTest {
 		
 		Pedido pedido = new Pedido();
 		pedido.setCliente(cliente);
-		pedido.setDataPedido(LocalDateTime.now());
 		pedido.setStatus(StatusPedido.AGUARDANDO);
 		pedido.setTotal(BigDecimal.TEN);
 		
