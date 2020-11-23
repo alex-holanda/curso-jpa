@@ -1,29 +1,40 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
- 
-  <modelVersion>4.0.0</modelVersion>
- 
-  <groupId>com.algaworks</groupId>
-  <artifactId>algaworks-ecommerce</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <name>algaworks-ecommerce</name>
-  
-  <properties>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.algaworks</groupId>
+	<artifactId>algaworks-ecommerce</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>algaworks-ecommerce</name>
+
+	<properties>
 		<project.build.sourceEnconding>UTF-8</project.build.sourceEnconding>
-	
+
 		<hibernate-core.version>5.4.10.Final</hibernate-core.version>
 		<mysql-connector-java.version>8.0.16</mysql-connector-java.version>
 		<lombok.version>1.18.16</lombok.version>
 		<junit.version>4.12</junit.version>
+		<flyway-core.version>7.2.1</flyway-core.version>
 	</properties>
 
 	<dependencies>
-	
+
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
 			<version>${hibernate-core.version}</version>
 		</dependency>
-	
+
+		<!-- Flyway - Core -->
+		<dependency>
+			<groupId>org.flywaydb</groupId>
+			<artifactId>flyway-core</artifactId>
+			<version>${flyway-core.version}</version>
+		</dependency>
+
+
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
@@ -57,6 +68,16 @@
 				<configuration>
 					<source>12</source>
 					<target>12</target>
+				</configuration>
+			</plugin>
+
+
+			<plugin>
+				<groupId>org.flywaydb</groupId>
+				<artifactId>flyway-maven-plugin</artifactId>
+				<version>${flyway-core.version}</version>
+				<configuration>
+					<driver>com.mysql.cj.jdbc.Driver</driver>
 				</configuration>
 			</plugin>
 		</plugins>
