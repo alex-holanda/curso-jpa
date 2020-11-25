@@ -9,9 +9,6 @@ import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.Lob;
@@ -21,20 +18,15 @@ import javax.persistence.Table;
 
 import com.algaworks.ecommerce.service.GenericoListener;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@Data
+@Getter
+@Setter
 @Entity
 @EntityListeners({GenericoListener.class})
 @Table(name = "produto")
-public class Produto {
-
-	@EqualsAndHashCode.Include
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+public class Produto extends EntidadeBaseInteger {
 	
 	@Column(name = "data_criacao", updatable = false)
 	private LocalDateTime dataCriacao;
