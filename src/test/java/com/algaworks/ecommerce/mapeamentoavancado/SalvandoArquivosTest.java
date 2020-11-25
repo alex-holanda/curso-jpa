@@ -9,6 +9,7 @@ import org.junit.Test;
 import com.algaworks.ecommerce.EntityManagerTest;
 import com.algaworks.ecommerce.model.NotaFiscal;
 import com.algaworks.ecommerce.model.Pedido;
+import com.algaworks.ecommerce.model.Produto;
 
 public class SalvandoArquivosTest extends EntityManagerTest {
 
@@ -21,7 +22,7 @@ public class SalvandoArquivosTest extends EntityManagerTest {
 		NotaFiscal notaFiscal = new NotaFiscal();
 		notaFiscal.setPedido(pedido);
 		notaFiscal.setDataEmissao(new Date());
-		notaFiscal.setXml(carregarNotaFiscal());
+		notaFiscal.setXml(carregarArquivo("/nota-fiscal.xml"));
 		entityManager.persist(notaFiscal);
 		
 		entityManager.getTransaction().commit();
@@ -40,10 +41,25 @@ public class SalvandoArquivosTest extends EntityManagerTest {
 //			throw new RuntimeException(e);
 //		}
 	}
+	
+	@Test
+	public void salvarFotoProduto() {
+		entityManager.getTransaction().begin();
+		
+		Produto produto = entityManager.find(Produto.class, 1);
+		produto.setFoto(carregarArquivo("/kindle.jpg"));
+		
+		entityManager.getTransaction().commit();
+		
+		entityManager.clear();
+		
+		Produto produtoVerificacao = entityManager.find(Produto.class, produto.getId());
+		Assert.assertNotNull(produtoVerificacao.getFoto());
+	}
 
-	private static byte[] carregarNotaFiscal() {
+	private static byte[] carregarArquivo(String nomeArquivo) {
 		try {
-			return SalvandoArquivosTest.class.getResourceAsStream("/nota-fiscal.xml").readAllBytes();
+			return SalvandoArquivosTest.class.getResourceAsStream(nomeArquivo).readAllBytes();
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
