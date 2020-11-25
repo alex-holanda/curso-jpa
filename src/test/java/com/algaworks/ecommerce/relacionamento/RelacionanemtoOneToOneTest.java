@@ -38,7 +38,7 @@ public class RelacionanemtoOneToOneTest extends EntityManagerTest {
 		
 		NotaFiscal notaFiscal = new NotaFiscal();
 		notaFiscal.setDataEmissao(new Date());
-		notaFiscal.setXml("notafiscalxml");
+		notaFiscal.setXml("notafiscalxml".getBytes());
 		notaFiscal.setPedido(pedido);
 		
 		entityManager.getTransaction().begin();
