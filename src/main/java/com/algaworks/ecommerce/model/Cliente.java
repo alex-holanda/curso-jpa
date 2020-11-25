@@ -1,5 +1,6 @@
 package com.algaworks.ecommerce.model;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -16,6 +17,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.MapKeyColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.PostLoad;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.SecondaryTable;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -24,6 +27,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "cliente")
+@SecondaryTable(name = "cliente_detalhe", pkJoinColumns = @PrimaryKeyJoinColumn(name = "cliente_id"))
 public class Cliente {
 
 	@Id
@@ -42,7 +46,11 @@ public class Cliente {
 	private String primeiroNome;
 	
 	@Enumerated(EnumType.STRING)
+	@Column(table = "cliente_detalhe")
 	private SexoCliente sexo;
+	
+	@Column(name = "data_nascimento", table = "cliente_detalhe")
+	private LocalDate dataNascimento;
 	
 	@OneToMany(mappedBy = "cliente")
 	private List<Pedido> pedidos;
