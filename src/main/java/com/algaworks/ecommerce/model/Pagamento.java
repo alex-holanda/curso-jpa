@@ -1,5 +1,6 @@
 package com.algaworks.ecommerce.model;
 
+import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -8,6 +9,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -15,8 +17,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-//@Table(name = "pagamento")
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Table(name = "pagamento")
+@Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn(name = "tipo_pagamento")
 public abstract class Pagamento extends EntidadeBaseInteger {
 
 	@MapsId
