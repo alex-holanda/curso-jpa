@@ -1,13 +1,19 @@
 package com.algaworks.ecommerce.model;
 
 import java.util.List;
+import java.util.Map;
 
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.MapKeyColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.PostLoad;
 import javax.persistence.Table;
@@ -25,6 +31,12 @@ public class Cliente {
 	private Integer id;
 	
 	private String nome;
+	
+	@ElementCollection
+	@CollectionTable(name = "cliente_contato", joinColumns = @JoinColumn(name = "cliente_id"))
+	@MapKeyColumn(name = "tipo")
+	@Column(name = "descricao")
+	private Map<String, String> contatos;
 	
 	@Transient
 	private String primeiroNome;
