@@ -64,7 +64,7 @@ public class Pedido extends EntidadeBaseInteger {
 	private List<ItemPedido> itens;
 
 	@OneToOne(mappedBy = "pedido")
-	private PagamentoCartao pagamento;
+	private Pagamento pagamento;
 
 	private void calcularTotal() {
 		total = BigDecimal.ZERO;
