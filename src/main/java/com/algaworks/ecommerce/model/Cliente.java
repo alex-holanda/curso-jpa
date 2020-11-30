@@ -27,34 +27,35 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "cliente", uniqueConstraints = { @UniqueConstraint(name = "unq_cpf", columnNames = { "cpf" }) },
-		indexes = { @Index(name = "idx_nome", columnList = "nome") })
+@Table(name = "cliente", uniqueConstraints = {
+		@UniqueConstraint(name = "unq_cpf", columnNames = { "cpf" }) }, indexes = {
+				@Index(name = "idx_nome", columnList = "nome") })
 @SecondaryTable(name = "cliente_detalhe", pkJoinColumns = @PrimaryKeyJoinColumn(name = "cliente_id"))
 public class Cliente extends EntidadeBaseInteger {
 
 	private String nome;
-	
+
 	private String cpf;
-	
+
 	@ElementCollection
 	@CollectionTable(name = "cliente_contato", joinColumns = @JoinColumn(name = "cliente_id"))
 	@MapKeyColumn(name = "tipo")
 	@Column(name = "descricao")
 	private Map<String, String> contatos;
-	
+
 	@Transient
 	private String primeiroNome;
-	
+
 	@Enumerated(EnumType.STRING)
 	@Column(table = "cliente_detalhe")
 	private SexoCliente sexo;
-	
+
 	@Column(name = "data_nascimento", table = "cliente_detalhe")
 	private LocalDate dataNascimento;
-	
+
 	@OneToMany(mappedBy = "cliente")
 	private List<Pedido> pedidos;
-	
+
 	@PostLoad
 	public void configurarPrimeiroNome() {
 		if (nome != null && !nome.isBlank()) {
