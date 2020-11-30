@@ -13,6 +13,6 @@ import lombok.Setter;
 @DiscriminatorValue("cartao")
 public class PagamentoCartao extends Pagamento {
 	
-	@Column(name = "numero_cartao")
+	@Column(name = "numero_cartao", length = 100)
 	private String numero;
 }

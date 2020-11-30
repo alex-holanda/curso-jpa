@@ -33,8 +33,10 @@ import lombok.Setter;
 @SecondaryTable(name = "cliente_detalhe", pkJoinColumns = @PrimaryKeyJoinColumn(name = "cliente_id"))
 public class Cliente extends EntidadeBaseInteger {
 
+	@Column(length = 100, nullable = false)
 	private String nome;
 
+	@Column(length = 14, nullable = false)
 	private String cpf;
 
 	@ElementCollection
@@ -47,7 +49,7 @@ public class Cliente extends EntidadeBaseInteger {
 	private String primeiroNome;
 
 	@Enumerated(EnumType.STRING)
-	@Column(table = "cliente_detalhe")
+	@Column(table = "cliente_detalhe", length = 30, nullable = false)
 	private SexoCliente sexo;
 
 	@Column(name = "data_nascimento", table = "cliente_detalhe")
