@@ -11,6 +11,8 @@ public class CachePrimeiroNivelTest extends EntityManagerTest {
 	public void analisarEstados() {
 	
 		Categoria categoriaNovo = new Categoria();
+		categoriaNovo.setNome("Móveis");
+		
 		Categoria categoriaGerenciadaMerge = entityManager.merge(categoriaNovo);
 		categoriaGerenciadaMerge.getId();
 		

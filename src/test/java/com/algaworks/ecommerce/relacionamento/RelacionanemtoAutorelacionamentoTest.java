@@ -11,7 +11,7 @@ public class RelacionanemtoAutorelacionamentoTest extends EntityManagerTest {
 	@Test
 	public void verificarRelacionamentoClientePedido() {
 		Categoria categoriaPai = new Categoria();
-		categoriaPai.setNome("Eletrônicos");
+		categoriaPai.setNome("Telefonia");
 		
 		Categoria categoria = new Categoria();
 		categoria.setNome("Celulares");

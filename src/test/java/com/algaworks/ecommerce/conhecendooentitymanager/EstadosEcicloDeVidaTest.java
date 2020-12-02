@@ -3,19 +3,23 @@ package com.algaworks.ecommerce.conhecendooentitymanager;
 import org.junit.Test;
 
 import com.algaworks.ecommerce.EntityManagerTest;
-import com.algaworks.ecommerce.model.Produto;
+import com.algaworks.ecommerce.model.Categoria;
 
 public class EstadosEcicloDeVidaTest extends EntityManagerTest {
 
 	@Test
-	public void verificarCache() {
-		Produto produto = entityManager.find(Produto.class, 1);
+	public void analisarEstados() {
+		Categoria categoriaNovo = new Categoria();
+		categoriaNovo.setNome("TV");
 		
-		System.out.println(produto.getNome());
+		Categoria categoriaGerenciadaMerge = entityManager.merge(categoriaNovo);
+		System.out.println(categoriaGerenciadaMerge);
 		
-		System.out.println("--------------------------------------------------------");
+		Categoria categoriaGerenciada = entityManager.find(Categoria.class, 1);
 		
-		Produto produtoResgatado = entityManager.find(Produto.class, produto.getId());
-		System.out.println(produtoResgatado.getNome());
+		entityManager.remove(categoriaGerenciada);
+		entityManager.persist(categoriaGerenciada);
+		
+		entityManager.detach(categoriaGerenciada);
 	}
 }

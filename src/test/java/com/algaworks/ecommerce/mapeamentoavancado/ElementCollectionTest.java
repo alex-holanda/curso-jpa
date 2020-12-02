@@ -10,6 +10,7 @@ import com.algaworks.ecommerce.EntityManagerTest;
 import com.algaworks.ecommerce.model.Atributo;
 import com.algaworks.ecommerce.model.Cliente;
 import com.algaworks.ecommerce.model.Produto;
+import com.algaworks.ecommerce.model.SexoCliente;
 
 public class ElementCollectionTest extends EntityManagerTest {
 
@@ -48,6 +49,7 @@ public class ElementCollectionTest extends EntityManagerTest {
 		entityManager.getTransaction().begin();
 		
 		Cliente cliente = entityManager.find(Cliente.class, 1);
+		cliente.setSexo(SexoCliente.MASCULINO);
 		cliente.setContatos(Collections.singletonMap("email", "fernando@email.com"));
 		
 		entityManager.getTransaction().commit();
@@ -55,7 +57,6 @@ public class ElementCollectionTest extends EntityManagerTest {
 		entityManager.clear();
 		
 		Cliente clienteVerificacao = entityManager.find(Cliente.class, cliente.getId());
-		System.out.println(clienteVerificacao.getContatos());
 		Assert.assertEquals("fernando@email.com", clienteVerificacao.getContatos().get("email"));
 	}
 }

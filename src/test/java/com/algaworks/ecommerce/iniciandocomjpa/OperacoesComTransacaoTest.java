@@ -1,6 +1,7 @@
 package com.algaworks.ecommerce.iniciandocomjpa;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -12,7 +13,7 @@ public class OperacoesComTransacaoTest extends EntityManagerTest {
 	
 	@Test
 	public void impedirOperacaoComBancoDedadosTest() {
-		Produto produto = entityManager.find(Produto.class, 1);		
+		Produto produto = entityManager.find(Produto.class, 4);		
 		entityManager.detach(produto);
 		
 		produto.setNome("Kindle Paperwhite 2gen");
@@ -22,7 +23,7 @@ public class OperacoesComTransacaoTest extends EntityManagerTest {
 		entityManager.clear();
 		
 		Produto produtoVerificado = entityManager.find(Produto.class, produto.getId());
-		Assert.assertEquals("Kindle", produtoVerificado.getNome());
+		Assert.assertEquals("Microfone Rode Videmic", produtoVerificado.getNome());
 	}
 	
 	@Test
@@ -31,6 +32,7 @@ public class OperacoesComTransacaoTest extends EntityManagerTest {
 		produtoPersist.setNome("Smartphone One Plus");
 		produtoPersist.setDescricao("O processador mais rápido.");
 		produtoPersist.setPreco(new BigDecimal("2000"));
+		produtoPersist.setDataCriacao(LocalDateTime.now());
 		
 		entityManager.getTransaction().begin();
 		entityManager.persist(produtoPersist);
@@ -66,6 +68,7 @@ public class OperacoesComTransacaoTest extends EntityManagerTest {
 		produto.setNome("Microfone Rode Videmic");
 		produto.setDescricao("A melhor qualidade de som.");
 		produto.setPreco(new BigDecimal("4000"));
+		produto.setDataCriacao(LocalDateTime.now());
 		
 		entityManager.getTransaction().begin();
 		
@@ -137,6 +140,7 @@ public class OperacoesComTransacaoTest extends EntityManagerTest {
 		produto.setNome("Câmera Canon");
 		produto.setDescricao("A melhor definição para suas fotos.");
 		produto.setPreco(new BigDecimal("5000"));
+		produto.setDataCriacao(LocalDateTime.now());
 		
 		entityManager.getTransaction().begin();
 		

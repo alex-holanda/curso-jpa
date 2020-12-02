@@ -8,6 +8,7 @@ import org.junit.Test;
 import com.algaworks.ecommerce.EntityManagerTest;
 import com.algaworks.ecommerce.model.Cliente;
 import com.algaworks.ecommerce.model.ItemPedido;
+import com.algaworks.ecommerce.model.ItemPedidoId;
 import com.algaworks.ecommerce.model.Pedido;
 import com.algaworks.ecommerce.model.Produto;
 import com.algaworks.ecommerce.model.StatusPedido;
@@ -45,6 +46,7 @@ public class RelacionanemtoOneToManyTest extends EntityManagerTest {
 		pedido.setTotal(BigDecimal.TEN);
 		
 		ItemPedido itemPedido = new ItemPedido();
+		itemPedido.setId(new ItemPedidoId());
 		itemPedido.setPedido(pedido);
 		itemPedido.setProduto(produto);
 		itemPedido.setPrecoProduto(produto.getPreco());
