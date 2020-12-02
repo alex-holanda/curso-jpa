@@ -14,6 +14,10 @@
 
             <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
             
+<!--             metadata, script, metadata-than-script, script-than-metadata -->
+<!--             <property name="javax.persistence.schema-generation.create-source" value="metadata-than-script"/> -->
+<!--             <property name="javax.persistence.schema-generation.drop-source" value="script-than-metadata"/> -->
+            
 <!--             <property name="javax.persistence.schema-generation.database.create-script-source" value="META-INF/banco-de-dados/script-criacao.sql"/> -->
 <!--             <property name="javax.persistence.schema-generation.database.drop-script-source" value="META-INF/banco-de-dados/script-remocao.sql"/> -->
             
