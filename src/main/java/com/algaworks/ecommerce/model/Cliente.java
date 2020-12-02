@@ -10,6 +10,7 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.ForeignKey;
 import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.MapKeyColumn;
@@ -30,7 +31,7 @@ import lombok.Setter;
 @Table(name = "cliente", uniqueConstraints = {
 		@UniqueConstraint(name = "unq_cpf", columnNames = { "cpf" }) }, indexes = {
 				@Index(name = "idx_nome", columnList = "nome") })
-@SecondaryTable(name = "cliente_detalhe", pkJoinColumns = @PrimaryKeyJoinColumn(name = "cliente_id"))
+@SecondaryTable(name = "cliente_detalhe", pkJoinColumns = @PrimaryKeyJoinColumn(name = "cliente_id"), foreignKey = @ForeignKey(name = "fk_cliente_detalhes_cliente"))
 public class Cliente extends EntidadeBaseInteger {
 
 	@Column(length = 100, nullable = false)
