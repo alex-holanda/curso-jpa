@@ -34,7 +34,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "pedido")
-@EntityListeners({GerarNotaFiscalListener.class, GenericoListener.class})
+@EntityListeners({ GerarNotaFiscalListener.class, GenericoListener.class })
 public class Pedido extends EntidadeBaseInteger {
 
 	@Column(name = "data_criacao", updatable = false, nullable = false)
@@ -70,9 +70,11 @@ public class Pedido extends EntidadeBaseInteger {
 
 	private void calcularTotal() {
 		total = BigDecimal.ZERO;
-		
+
 		if (itens != null) {
-			total = itens.stream().map(ItemPedido::getPrecoProduto).reduce(BigDecimal.ZERO, BigDecimal::add);
+			total = itens.stream()
+					.map(i -> new BigDecimal(i.getQuantidade()).multiply(i.getPrecoProduto()))
+					.reduce(BigDecimal.ZERO, BigDecimal::add);
 		}
 	}
 
@@ -112,7 +114,7 @@ public class Pedido extends EntidadeBaseInteger {
 	public void aoCarregar() {
 		System.out.println("Após carregar o Pedido");
 	}
-	
+
 	public boolean isPago() {
 		return StatusPedido.PAGO.equals(status);
 	}
