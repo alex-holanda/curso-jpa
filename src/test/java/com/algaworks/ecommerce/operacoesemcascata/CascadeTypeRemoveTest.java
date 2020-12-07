@@ -1,13 +1,32 @@
 package com.algaworks.ecommerce.operacoesemcascata;
 
 import org.junit.Assert;
+import org.junit.Test;
 
 import com.algaworks.ecommerce.EntityManagerTest;
 import com.algaworks.ecommerce.model.ItemPedido;
 import com.algaworks.ecommerce.model.ItemPedidoId;
 import com.algaworks.ecommerce.model.Pedido;
+import com.algaworks.ecommerce.model.Produto;
 
 public class CascadeTypeRemoveTest extends EntityManagerTest {
+	
+	@Test
+	public void removerRelacaoProdutoCategoria() {
+		entityManager.getTransaction().begin();
+		
+		Produto produto = entityManager.find(Produto.class, 1);
+		Assert.assertFalse(produto.getCategorias().isEmpty());
+		
+		produto.getCategorias().clear();
+		
+		entityManager.getTransaction().commit();
+		
+		entityManager.clear();
+		
+		Produto produtoVerificacao = entityManager.find(Produto.class, produto.getId());
+		Assert.assertTrue(produtoVerificacao.getCategorias().isEmpty());
+	}
 	
 //	@Test
 	public void removerPedidoEItens() {
