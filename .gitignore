@@ -1,9 +1,12 @@
 *.iml
 
-.idea
-.settings
+.idea/
+.settings/
 .classpath
 .factorypath
 .project
 
-target
+target/
+out/
+
+transaction.log
