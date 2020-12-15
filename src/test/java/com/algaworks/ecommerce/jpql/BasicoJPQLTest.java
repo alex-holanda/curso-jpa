@@ -17,7 +17,7 @@ public class BasicoJPQLTest extends EntityManagerTest {
 
     @Test
     public void ordernarResultados() {
-        String jpql = "select c from Cliente c order by c.nome desc";
+        String jpql = "select c from Cliente c order by c.nome desc"; // asc
 
         TypedQuery<Cliente> typedQuery = entityManager.createQuery(jpql, Cliente.class);
 

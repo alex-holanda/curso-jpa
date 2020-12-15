@@ -1,5 +1,5 @@
-insert into produto (id, nome, preco, data_criacao, descricao) values (1, 'Kindle', 499.0, date_sub(sysdate(), interval 1 day), 'Conheça o novo Kindle, agora com iluminação embutida ajustável, que permite que você leia em ambientes abertos ou fechados, a qualquer hora do dia.');
-insert into produto (id, nome, preco, data_criacao, descricao) values (3, 'Câmera GoPro Hero 7', 1400.0, date_sub(sysdate(), interval 1 day), 'Desempenho 2x melhor.');
+insert into produto (id, nome, preco, data_criacao, descricao) values (1, 'Kindle', 499.0, date_sub(sysdate(), interval 1 day), 'Conheï¿½a o novo Kindle, agora com iluminaï¿½ï¿½o embutida ajustï¿½vel, que permite que vocï¿½ leia em ambientes abertos ou fechados, a qualquer hora do dia.');
+insert into produto (id, nome, preco, data_criacao, descricao) values (3, 'Cï¿½mera GoPro Hero 7', 1400.0, date_sub(sysdate(), interval 1 day), 'Desempenho 2x melhor.');
 
 insert into cliente (id, nome, cpf) values (1, 'Fernando Medeiros', '000');
 insert into cliente (id, nome, cpf) values (2, 'Marcos Mariano', '111');
@@ -18,7 +18,12 @@ insert into pagamento (pedido_id, status, tipo_pagamento, numero_cartao, codigo_
 
 insert into nota_fiscal (pedido_id, xml, data_emissao) values (2, '<xml />', sysdate()); 
 
-insert into categoria (id, nome) values (1, 'Eletrodomésticos');
-insert into categoria (id, nome) values (2, 'Livros');
+insert into categoria (nome) values ('EletrodomÃ©sticos');
+insert into categoria (nome) values ('Livros');
+insert into categoria (nome) values ('Esportes');
+insert into categoria (nome) values ('Futebol');
+insert into categoria (nome) values ('NataÃ§Ã£o');
+insert into categoria (nome) values ('Notebooks');
+insert into categoria (nome) values ('Smartphones');
 
 insert into produto_categoria (produto_id, categoria_id) values (1, 2);
