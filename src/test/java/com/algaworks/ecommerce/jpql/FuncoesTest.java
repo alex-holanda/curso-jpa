@@ -1,16 +1,32 @@
 package com.algaworks.ecommerce.jpql;
 
 import com.algaworks.ecommerce.EntityManagerTest;
+import com.algaworks.ecommerce.model.Pedido;
 import org.junit.Assert;
 import org.junit.Test;
 
 import javax.persistence.TypedQuery;
+import java.lang.reflect.Type;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.util.List;
 import java.util.TimeZone;
 
 public class FuncoesTest extends EntityManagerTest {
+
+    @Test
+    public void aplicarFuncaoNativa() {
+//        String jpql = "select function('dayname', p.dataCriacao) from Pedido p where function('acima_media_faturamento', p.total) = 1";
+
+        String jpql = "select p from Pedido p where function('acima_media_faturamento', p.total) = 1";
+
+        TypedQuery<Pedido> typedQuery = entityManager.createQuery(jpql, Pedido.class);
+
+        List<Pedido> lista = typedQuery.getResultList();
+        Assert.assertFalse(lista.isEmpty());
+
+        lista.forEach(obj -> System.out.println(obj));
+    }
 
     @Test
     public void aplicarFuncaoColecao() {
