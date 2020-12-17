@@ -92,12 +92,12 @@ public class Pedido extends EntidadeBaseInteger {
 
 	@PostPersist
 	public void aposPersistir() {
-		System.out.println(">>> Ap髎 persistir Pedido");
+		System.out.println(">>> Ap贸s persistir Pedido");
 	}
 
 	@PostUpdate
 	public void aposAtualizar() {
-		System.out.println(">>> Ap髎 atualizar Pedido");
+		System.out.println(">>> Ap贸s atualizar Pedido");
 	}
 
 	@PreRemove
@@ -107,12 +107,12 @@ public class Pedido extends EntidadeBaseInteger {
 
 	@PostRemove
 	public void aposRemover() {
-		System.out.println(">>> Ap髎 remover Pedido");
+		System.out.println(">>> Ap贸s remover Pedido");
 	}
 
 	@PostLoad
 	public void aoCarregar() {
-		System.out.println("Ap髎 carregar o Pedido");
+		System.out.println("Ap贸s carregar o Pedido");
 	}
 
 	public boolean isPago() {
