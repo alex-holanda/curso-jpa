@@ -4,20 +4,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import javax.persistence.CollectionTable;
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
-import javax.persistence.ForeignKey;
-import javax.persistence.Index;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.Lob;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import javax.persistence.*;
 
 import com.algaworks.ecommerce.service.GenericoListener;
 
@@ -30,6 +17,10 @@ import lombok.Setter;
 @EntityListeners({ GenericoListener.class })
 @Table(name = "produto", indexes = { @Index(name = "idx_nome", columnList = "nome") }, uniqueConstraints = {
 		@UniqueConstraint(name = "unq_nome", columnNames = { "nome" }) })
+@NamedQueries({
+		@NamedQuery(name = "Produto.listar", query = "select p from Produto p"),
+		@NamedQuery(name = "Produto.listarPorCategoria", query = "select p from Produto p where exists (select 1 from Categoria c2 join c2.produtos p2 where p2 = p and c2.id = :categoria)")
+})
 public class Produto extends EntidadeBaseInteger {
 
 	@Column(name = "data_criacao", updatable = false, nullable = false)
