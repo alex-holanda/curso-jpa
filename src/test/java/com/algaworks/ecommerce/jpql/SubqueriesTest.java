@@ -13,6 +13,19 @@ import java.util.List;
 public class SubqueriesTest extends EntityManagerTest {
 
     @Test
+    public void pesquisarComExistsExercicio() {
+        String jpql = "select p from Produto p where exists " +
+                "(select 1 from ItemPedido ip2 join ip2.produto p2 where p2 = p and ip2.precoProduto <> p.preco)";
+
+        TypedQuery<Produto> typedQuery = entityManager.createQuery(jpql, Produto.class);
+
+        List<Produto> lista = typedQuery.getResultList();
+        Assert.assertFalse(lista.isEmpty());
+
+        lista.forEach(obj -> System.out.println("ID: " + obj.getId()));
+    }
+
+    @Test
     public void pesquisarComSubqueryExercicio() {
         String jpql = "select c from Cliente c where " +
                 "(select count(cliente) from Pedido where cliente = c) >= 2";
@@ -26,10 +39,10 @@ public class SubqueriesTest extends EntityManagerTest {
     }
 
     @Test
-    public void pesquisarComExistsExercicio() {
-        String jpql = "select p from Pedido p where exists " +
-                "(select 1 from ItemPedido ip2 join ip2.pedido p2 join ip2.produto pro2 join pro2.categorias c2 " +
-                "where p2 = p and c2.id = 2)";
+    public void pesquisarComINExercicio() {
+        String jpql = "select p from Pedido p where p.id in " +
+                "(select p2.id from ItemPedido ip2 join ip2.pedido p2 join ip2.produto pro2 join pro2.categorias c2 " +
+                "where c2.id = 2)";
 
         TypedQuery<Pedido> typedQuery = entityManager.createQuery(jpql, Pedido.class);
 
