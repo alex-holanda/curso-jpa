@@ -8,7 +8,7 @@ import org.junit.Test;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
-public class NamedQueryTest extends EntityManagerTest {
+public class DynamicQueryTest extends EntityManagerTest {
 
     @Test
     public void executarConsultaDinamica() {
