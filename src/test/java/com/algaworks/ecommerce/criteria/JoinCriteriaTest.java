@@ -2,7 +2,6 @@ package com.algaworks.ecommerce.criteria;
 
 import com.algaworks.ecommerce.EntityManagerTest;
 import com.algaworks.ecommerce.model.*;
-import com.mysql.cj.xdevapi.Client;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -40,6 +39,7 @@ public class JoinCriteriaTest extends EntityManagerTest {
         CriteriaQuery<Pedido> criteriaQuery = criteriaBuilder.createQuery(Pedido.class);
         Root<Pedido> root = criteriaQuery.from(Pedido.class);
         Join<Pedido, Pagamento> joinPagamento = root.join("pagamento", JoinType.LEFT);
+        System.out.println(joinPagamento.getJoinType());
 
         criteriaQuery.select(root);
 
@@ -47,7 +47,7 @@ public class JoinCriteriaTest extends EntityManagerTest {
 
         List<Pedido> lista = typedQuery.getResultList();
         Assert.assertFalse(lista.isEmpty());
-        Assert.assertTrue(lista.size() == 5);
+        Assert.assertEquals(5, lista.size());
     }
 
     @Test
@@ -64,7 +64,7 @@ public class JoinCriteriaTest extends EntityManagerTest {
 
         List<Pedido> lista = typedQuery.getResultList();
         Assert.assertFalse(lista.isEmpty());
-        Assert.assertTrue(lista.size() == 2);
+        Assert.assertEquals(2, lista.size());
     }
 
     @Test
@@ -75,6 +75,8 @@ public class JoinCriteriaTest extends EntityManagerTest {
         Join<Pedido, Pagamento> joinPagamento = root.join("pagamento");
         Join<Pedido, ItemPedido> joinItens = root.join("itens");
         Join<ItemPedido, Produto> joinItemProduto = joinItens.join("produto");
+        System.out.println(joinPagamento.getJoinType());
+        System.out.println(joinItemProduto.getJoinType());
 
         criteriaQuery.select(root);
 
