@@ -12,6 +12,24 @@ import java.util.List;
 public class JoinCriteriaTest extends EntityManagerTest {
 
     @Test
+    public void buscarPedidosComProdutoEspecifico() {
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Pedido> criteriaQuery = criteriaBuilder.createQuery(Pedido.class);
+        Root<Pedido> root = criteriaQuery.from(Pedido.class);
+        root.fetch("itens").fetch("produto");
+        Join<ItemPedido, Produto> rootItemPedidoProduto = root.join("itens").join("produto");
+
+        criteriaQuery.select(root);
+
+        criteriaQuery.where(criteriaBuilder.equal(rootItemPedidoProduto.get("id"), 1L));
+
+        TypedQuery<Pedido> typedQuery = entityManager.createQuery(criteriaQuery);
+
+        List<Pedido> lista = typedQuery.getResultList();
+        Assert.assertFalse(lista.isEmpty());
+    }
+
+    @Test
     public void usarJoinFetch() {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Pedido> criteriaQuery = criteriaBuilder.createQuery(Pedido.class);
