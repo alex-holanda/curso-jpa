@@ -27,6 +27,13 @@
 			<version>${hibernate-core.version}</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-jpamodelgen</artifactId>
+			<version>${hibernate-core.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
 		<!-- Flyway - Core -->
 		<dependency>
 			<groupId>org.flywaydb</groupId>
