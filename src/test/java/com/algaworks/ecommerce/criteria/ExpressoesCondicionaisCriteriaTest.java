@@ -17,6 +17,24 @@ import java.util.List;
 public class ExpressoesCondicionaisCriteriaTest extends EntityManagerTest {
 
     @Test
+    public void ordernarResultados() {
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Cliente> criteriaQuery = criteriaBuilder.createQuery(Cliente.class);
+        Root<Cliente> root = criteriaQuery.from(Cliente.class);
+
+        criteriaQuery.select(root);
+
+        criteriaQuery.orderBy(criteriaBuilder.asc(root.get(Cliente_.nome)));
+
+        TypedQuery<Cliente> typedQuery = entityManager.createQuery(criteriaQuery);
+
+        List<Cliente> lista = typedQuery.getResultList();
+        Assert.assertFalse(lista.isEmpty());
+
+        lista.forEach(c -> System.out.println("ID: " + c.getId() + ", Nome: " + c.getNome()));
+    }
+
+    @Test
     public void usarOperadores() {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Pedido> criteriaQuery = criteriaBuilder.createQuery(Pedido.class);
