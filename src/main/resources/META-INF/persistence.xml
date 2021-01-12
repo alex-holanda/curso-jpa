@@ -20,7 +20,7 @@
 <!--			drop-and-create - none - create - drop-->
 			<property
 				name="javax.persistence.schema-generation.database.action"
-				value="drop-and-create" />
+				value="none" />
 
 			<!-- metadata, script, metadata-than-script, script-than-metadata -->
 <!--			<property name="javax.persistence.schema-generation.create-source"-->
