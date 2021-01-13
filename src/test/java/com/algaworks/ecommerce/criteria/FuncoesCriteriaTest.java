@@ -10,10 +10,35 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Join;
 import javax.persistence.criteria.Root;
-import java.lang.reflect.Type;
 import java.util.List;
 
 public class FuncoesCriteriaTest extends EntityManagerTest {
+
+    @Test
+    public void aplicarFuncaoColecao() {
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Object[]> criteriaQuery = criteriaBuilder.createQuery(Object[].class);
+        Root<Pedido> root = criteriaQuery.from(Pedido.class);
+
+        criteriaQuery.multiselect(
+                root.get(Pedido_.id),
+                criteriaBuilder.size(root.get(Pedido_.itens))
+        );
+
+        criteriaQuery.where(criteriaBuilder.greaterThan(criteriaBuilder.size(root.get(Pedido_.itens)), 1));
+
+        criteriaQuery.groupBy(root.get(Pedido_.id));
+
+        TypedQuery<Object[]> typedQuery = entityManager.createQuery(criteriaQuery);
+
+        List<Object[]> lista = typedQuery.getResultList();
+        Assert.assertFalse(lista.isEmpty());
+
+        lista.forEach(arr -> System.out.println(
+                arr[0]
+                        + ", size: " + arr[1]
+        ));
+    }
 
     @Test
     public void aplicarFuncaoNumero() {
@@ -35,9 +60,9 @@ public class FuncoesCriteriaTest extends EntityManagerTest {
 
         lista.forEach(arr -> System.out.println(
                 arr[0]
-                + ", abs: " + arr[1]
-                + ", mod: " + arr[2]
-                + ", sqrt: " + arr[3]
+                        + ", abs: " + arr[1]
+                        + ", mod: " + arr[2]
+                        + ", sqrt: " + arr[3]
         ));
     }
 
