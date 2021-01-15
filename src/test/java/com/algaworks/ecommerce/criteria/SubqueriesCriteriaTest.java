@@ -13,6 +13,36 @@ import java.util.List;
 public class SubqueriesCriteriaTest extends EntityManagerTest {
 
     @Test
+    public void pesquisarComExistsExercicio() {
+//        Todos os clientes que fizeram mais de 2 pedidos
+//        String jpql = "select c from Cliente c where " +
+//        "(select count(cliente) from Pedido where cliente = c) > 2
+
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Cliente> criteriaQuery = criteriaBuilder.createQuery(Cliente.class);
+        Root<Cliente> root = criteriaQuery.from(Cliente.class);
+
+        criteriaQuery.select(root);
+
+        Subquery<Long> subquery = criteriaQuery.subquery(Long.class);
+        Root<Pedido> subqueryRoot = subquery.from(Pedido.class);
+        subquery.select(criteriaBuilder.count(subqueryRoot.get(Pedido_.cliente)));
+        subquery.where(criteriaBuilder.equal(subqueryRoot.get(Pedido_.cliente), root));
+
+        criteriaQuery.where(criteriaBuilder.greaterThan(subquery, 2L));
+
+        TypedQuery<Cliente> typedQuery = entityManager.createQuery(criteriaQuery);
+
+        List<Cliente> lista = typedQuery.getResultList();
+        Assert.assertFalse(lista.isEmpty());
+
+        lista.forEach(obj -> System.out.println(
+                "ID: " + obj.getId() +
+                        ", Nome: " + obj.getNome()
+        ));
+    }
+
+    @Test
     public void pesquisarComExists() {
 //        Todos os produtos que já foram vendidos
 //        String jpql = "select p from Produto p where exists " +
@@ -99,7 +129,7 @@ public class SubqueriesCriteriaTest extends EntityManagerTest {
 
         lista.forEach(obj -> System.out.println(
                 "ID: " + obj.getId() +
-                ", Nome: " + obj.getNome()
+                        ", Nome: " + obj.getNome()
         ));
     }
 
@@ -128,7 +158,7 @@ public class SubqueriesCriteriaTest extends EntityManagerTest {
 
         lista.forEach(obj -> System.out.println(
                 "ID: " + obj.getId() +
-                ", Total: " + obj.getTotal()
+                        ", Total: " + obj.getTotal()
         ));
     }
 
@@ -157,8 +187,8 @@ public class SubqueriesCriteriaTest extends EntityManagerTest {
 
         lista.forEach(obj -> System.out.println(
                 "ID: " + obj.getId() +
-                ", Nome: " + obj.getNome() +
-                ", Preço: " + obj.getPreco())
+                        ", Nome: " + obj.getNome() +
+                        ", Preço: " + obj.getPreco())
         );
     }
 }
