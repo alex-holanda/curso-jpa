@@ -27,7 +27,9 @@ public class SubqueriesCriteriaTest extends EntityManagerTest {
         Subquery<Integer> subquery = criteriaQuery.subquery(Integer.class);
         Root<ItemPedido> subqueryRoot = subquery.from(ItemPedido.class);
         subquery.select(criteriaBuilder.literal(1));
-        subquery.where(criteriaBuilder.equal(subqueryRoot.get(ItemPedido_.produto), root.get(Produto_.id)));
+        subquery.where(criteriaBuilder.equal(subqueryRoot.get(ItemPedido_.produto), root));
+
+        criteriaQuery.where(criteriaBuilder.exists(subquery));
 
         TypedQuery<Produto> typedQuery = entityManager.createQuery(criteriaQuery);
 
