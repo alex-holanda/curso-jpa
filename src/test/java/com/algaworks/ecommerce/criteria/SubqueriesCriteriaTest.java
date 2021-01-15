@@ -13,6 +13,36 @@ import java.util.List;
 public class SubqueriesCriteriaTest extends EntityManagerTest {
 
     @Test
+    public void pesquisarComINExercicio() {
+//        Todos os pedidos que tem algum produto com categoria de id 2
+
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Pedido> criteriaQuery = criteriaBuilder.createQuery(Pedido.class);
+        Root<Pedido> root = criteriaQuery.from(Pedido.class);
+
+        criteriaQuery.select(root);
+
+        Subquery<Integer> subquery = criteriaQuery.subquery(Integer.class);
+        Root<ItemPedido> subqueryRoot = subquery.from(ItemPedido.class);
+        Join<ItemPedido, Produto> joinProduto = subqueryRoot.join(ItemPedido_.produto);
+        Join<Produto, Categoria> joinCategoria = joinProduto.join(Produto_.categorias);
+        subquery.select(subqueryRoot.get(ItemPedido_.pedido).get(Pedido_.id));
+        subquery.where(criteriaBuilder.equal(joinCategoria.get(Categoria_.id), 2));
+
+        criteriaQuery.where(root.get(Pedido_.id).in(subquery));
+
+        TypedQuery<Pedido> typedQuery = entityManager.createQuery(criteriaQuery);
+
+        List<Pedido> lista = typedQuery.getResultList();
+        Assert.assertFalse(lista.isEmpty());
+
+        lista.forEach(obj -> System.out.println(
+                "ID: " + obj.getId()
+        ));
+
+    }
+
+    @Test
     public void pesquisarComExistsExercicio() {
 //        Todos os clientes que fizeram mais de 2 pedidos
 //        String jpql = "select c from Cliente c where " +
