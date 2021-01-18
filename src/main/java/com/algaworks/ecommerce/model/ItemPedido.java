@@ -2,20 +2,17 @@ package com.algaworks.ecommerce.model;
 
 import java.math.BigDecimal;
 
-import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.ForeignKey;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import lombok.Data;
 
 @Data
 @Entity
 @Table(name = "item_pedido")
+@SqlResultSetMappings({
+		@SqlResultSetMapping(name = "item_pedido-produto.ItemPedido-Produto",
+			entities = {@EntityResult(entityClass = ItemPedido.class), @EntityResult(entityClass = Produto.class)})
+})
 public class ItemPedido {
 
 	@EmbeddedId
