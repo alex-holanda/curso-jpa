@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import com.algaworks.ecommerce.dto.ProdutoDTO;
 import com.algaworks.ecommerce.service.GenericoListener;
 
 import lombok.Getter;
@@ -34,7 +35,14 @@ import lombok.Setter;
                 @FieldResult(name = "dataUltimaAtualizacao", column = "prd_data_ultima_atualizacao")
             }
         ) }),
-
+        @SqlResultSetMapping(name = "ecm_produto.ProdutoDTO",
+                classes = {
+                    @ConstructorResult(targetClass = ProdutoDTO.class,
+                            columns = {
+                                @ColumnResult(name = "prd_id", type = Integer.class),
+                                @ColumnResult(name = "prd_nome", type = String.class)
+                            })
+                })
 })
 public class Produto extends EntidadeBaseInteger {
 
