@@ -5,6 +5,9 @@
              version="2.2">
 
     <persistence-unit name="Ecommerce-PU">
+<!--        Datasource do servidor de aplicação-->
+<!--        <jta-data-source>projetoDS</jta-data-source>-->
+
         <mapping-file>META-INF/consultas/pedido.xml</mapping-file>
         <mapping-file>META-INF/consultas/produto.xml</mapping-file>
         <mapping-file>META-INF/consultas/categoria.xml</mapping-file>
@@ -24,6 +27,7 @@
             <property name="hibernate.connection.privider_class"
                       value="org.hibernate.hikaricp.internal.HikariCPConnectionProvider"/>
 
+            
             <property name="javax.persistence.schema-generation.database.action"
                       value="none"/>
 
