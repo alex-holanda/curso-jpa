@@ -5,6 +5,10 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PastOrPresent;
+import javax.validation.constraints.PositiveOrZero;
 
 import com.algaworks.ecommerce.dto.ProdutoDTO;
 import com.algaworks.ecommerce.service.GenericoListener;
@@ -56,12 +60,16 @@ import lombok.Setter;
 })
 public class Produto extends EntidadeBaseInteger {
 
+    @PastOrPresent
+    @NotNull
     @Column(name = "data_criacao", updatable = false, nullable = false)
     private LocalDateTime dataCriacao;
 
+    @PastOrPresent
     @Column(name = "data_ultima_atualizacao", insertable = false)
     private LocalDateTime dataUltimaAtualizacao;
 
+    @NotBlank
     @Column(length = 100, nullable = false)
     private String nome;
 
@@ -69,6 +77,7 @@ public class Produto extends EntidadeBaseInteger {
     @Lob
     private String descricao;
 
+    @PositiveOrZero
     private BigDecimal preco;
 
     @ManyToMany
