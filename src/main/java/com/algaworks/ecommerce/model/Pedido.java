@@ -42,6 +42,7 @@ import lombok.Setter;
 public class Pedido extends EntidadeBaseInteger {
 
 	@PastOrPresent
+	@NotNull
 	@Column(name = "data_criacao", updatable = false, nullable = false)
 	private LocalDateTime dataCriacao;
 

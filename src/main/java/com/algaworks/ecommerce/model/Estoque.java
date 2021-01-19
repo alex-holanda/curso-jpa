@@ -1,10 +1,6 @@
 package com.algaworks.ecommerce.model;
 
-import javax.persistence.Entity;
-import javax.persistence.ForeignKey;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
 
@@ -24,5 +20,6 @@ public class Estoque extends EntidadeBaseInteger {
 
 	@NotNull
 	@PositiveOrZero
+	@Column(nullable = false)
 	private Integer quantidade;
 }
