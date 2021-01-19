@@ -1,13 +1,13 @@
 package com.algaworks.ecommerce.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
-
-import javax.persistence.*;
-
-import lombok.Getter;
-import lombok.Setter;
 
 @Getter
 @Setter
@@ -24,9 +24,11 @@ import lombok.Setter;
 )
 public class Cliente extends EntidadeBaseInteger {
 
+	@NotBlank
 	@Column(length = 100, nullable = false)
 	private String nome;
 
+	@NotBlank
 	@Column(length = 14, nullable = false)
 	private String cpf;
 

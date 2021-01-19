@@ -13,6 +13,8 @@
 		<project.build.sourceEnconding>UTF-8</project.build.sourceEnconding>
 
 		<hibernate-core.version>5.4.10.Final</hibernate-core.version>
+		<hibernate-validator.version>6.1.0.Final</hibernate-validator.version>
+		<javax.el.version>3.0.0</javax.el.version>
 		<mysql-connector-java.version>8.0.16</mysql-connector-java.version>
 		<lombok.version>1.18.16</lombok.version>
 		<junit.version>4.12</junit.version>
@@ -29,17 +31,30 @@
 
 		<dependency>
 			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>${hibernate-validator.version}</version>
+		</dependency>
+
+<!--		Dependencia do hibernate validator-->
+		<dependency>
+			<groupId>org.glassfish</groupId>
+			<artifactId>javax.el</artifactId>
+			<version>${javax.el.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-jpamodelgen</artifactId>
 			<version>${hibernate-core.version}</version>
 			<scope>provided</scope>
 		</dependency>
 
 		<!-- Flyway - Core -->
-		<dependency>
-			<groupId>org.flywaydb</groupId>
-			<artifactId>flyway-core</artifactId>
-			<version>${flyway-core.version}</version>
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>org.flywaydb</groupId>-->
+<!--			<artifactId>flyway-core</artifactId>-->
+<!--			<version>${flyway-core.version}</version>-->
+<!--		</dependency>-->
 
 
 		<dependency>
@@ -79,14 +94,14 @@
 			</plugin>
 
 
-			<plugin>
-				<groupId>org.flywaydb</groupId>
-				<artifactId>flyway-maven-plugin</artifactId>
-				<version>${flyway-core.version}</version>
-				<configuration>
-					<driver>com.mysql.cj.jdbc.Driver</driver>
-				</configuration>
-			</plugin>
+<!--			<plugin>-->
+<!--				<groupId>org.flywaydb</groupId>-->
+<!--				<artifactId>flyway-maven-plugin</artifactId>-->
+<!--				<version>${flyway-core.version}</version>-->
+<!--				<configuration>-->
+<!--					<driver>com.mysql.cj.jdbc.Driver</driver>-->
+<!--				</configuration>-->
+<!--			</plugin>-->
 		</plugins>
 	</build>
 </project>
