@@ -17,7 +17,8 @@ public class EntityGraphTest extends EntityManagerTest {
         entityGraph.addAttributeNodes("dataCriacao", "status", "total", "cliente");
 
         Map<String, Object> properties = new HashMap<>();
-        properties.put("javax.persistence.fetchgraph", entityGraph);
+//        properties.put("javax.persistence.fetchgraph", entityGraph);
+        properties.put("javax.persistence.loadgraph", entityGraph);
 
         Pedido pedido = entityManager.find(Pedido.class, 1, properties);
         Assert.assertNotNull(pedido);
