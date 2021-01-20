@@ -27,6 +27,7 @@
             <property name="hibernate.connection.privider_class"
                       value="org.hibernate.hikaricp.internal.HikariCPConnectionProvider"/>
 
+            <property name="javax.persistence.sharedCache.mode" value="ALL"/>
             
             <property name="javax.persistence.schema-generation.database.action"
                       value="none"/>

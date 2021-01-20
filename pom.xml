@@ -82,6 +82,13 @@
 			<version>${junit.version}</version>
 			<scope>test</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-testing</artifactId>
+			<version>${hibernate-core.version}</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
