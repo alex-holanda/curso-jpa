@@ -6,6 +6,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import javax.persistence.EntityGraph;
+import javax.persistence.TypedQuery;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,10 +25,11 @@ public class EntityGraphTest extends EntityManagerTest {
 //        Pedido pedido = entityManager.find(Pedido.class, 1, properties);
 //        Assert.assertNotNull(pedido);
 
-        List<Pedido> lista = entityManager.createQuery("select p from Pedido p")
-                .setHint("javax.persistence.fetchgraph", entityGraph)
-                .getResultList();
+        TypedQuery<Pedido> typedQuery = entityManager
+                .createQuery("select p from Pedido p", Pedido.class);
+        typedQuery.setHint("javax.persistence.fetchgraph", entityGraph);
 
+        List<Pedido> lista = typedQuery.getResultList();
         Assert.assertFalse(lista.isEmpty());
     }
 }
