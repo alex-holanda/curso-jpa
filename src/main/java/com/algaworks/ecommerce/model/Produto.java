@@ -11,6 +11,7 @@ import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.PositiveOrZero;
 
 import com.algaworks.ecommerce.dto.ProdutoDTO;
+import com.algaworks.ecommerce.model.converter.BooleanToSimNaoConverter;
 import com.algaworks.ecommerce.service.GenericoListener;
 
 import lombok.Getter;
@@ -100,4 +101,9 @@ public class Produto extends EntidadeBaseInteger {
 
     @Lob
     private byte[] foto;
+
+    @Convert(converter = BooleanToSimNaoConverter.class)
+    @NotNull
+    @Column(length = 3, nullable = false)
+    private Boolean ativo = Boolean.FALSE;
 }
