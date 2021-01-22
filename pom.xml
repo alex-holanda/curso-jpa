@@ -19,6 +19,7 @@
 		<lombok.version>1.18.16</lombok.version>
 		<junit.version>4.12</junit.version>
 		<flyway-core.version>7.2.1</flyway-core.version>
+		<ehcache.version>3.8.1</ehcache.version>
 	</properties>
 
 	<dependencies>
@@ -39,6 +40,18 @@
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-hikaricp</artifactId>
 			<version>${hibernate-core.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-jcache</artifactId>
+			<version>${hibernate-core.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.ehcache</groupId>
+			<artifactId>ehcache</artifactId>
+			<version>${ehcache.version}</version>
 		</dependency>
 
 <!--		Dependencia do hibernate validator-->
@@ -83,12 +96,6 @@
 			<scope>test</scope>
 		</dependency>
 
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-testing</artifactId>
-			<version>${hibernate-core.version}</version>
-			<scope>test</scope>
-		</dependency>
 	</dependencies>
 
 	<build>
