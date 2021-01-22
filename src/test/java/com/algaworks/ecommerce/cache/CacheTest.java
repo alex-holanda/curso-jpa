@@ -91,6 +91,7 @@ public class CacheTest {
 
         entityManager1.close();
         entityManager2.close();
+        entityManager3.close();
     }
 
     @Test
