@@ -4,8 +4,6 @@ import com.algaworks.ecommerce.listener.GerarNotaFiscalListener;
 import com.algaworks.ecommerce.service.GenericoListener;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.LazyToOne;
-import org.hibernate.annotations.LazyToOneOption;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
