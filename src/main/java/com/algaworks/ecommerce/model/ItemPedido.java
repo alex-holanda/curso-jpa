@@ -17,6 +17,9 @@ import lombok.Data;
 })
 public class ItemPedido {
 
+	@Version
+	private Integer versao;
+
 	@EmbeddedId
 	private ItemPedidoId id;
 
