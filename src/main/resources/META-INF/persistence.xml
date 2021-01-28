@@ -5,8 +5,8 @@
              version="2.2">
 
     <persistence-unit name="Ecommerce-PU">
-<!--        Datasource do servidor de aplicação-->
-<!--        <jta-data-source>projetoDS</jta-data-source>-->
+        <!--        Datasource do servidor de aplicação-->
+        <!--        <jta-data-source>projetoDS</jta-data-source>-->
 
         <mapping-file>META-INF/consultas/pedido.xml</mapping-file>
         <mapping-file>META-INF/consultas/produto.xml</mapping-file>
@@ -25,10 +25,6 @@
             <property name="javax.persistence.jdbc.driver"
                       value="com.mysql.cj.jdbc.Driver"/>
 
-            <property name="hibernate.hikari.maximumPoolSize" value="8"/>
-            <property name="hibernate.connection.privider_class"
-                      value="org.hibernate.hikaricp.internal.HikariCPConnectionProvider"/>
-            
             <property name="javax.persistence.schema-generation.database.action"
                       value="none"/>
 
@@ -52,15 +48,30 @@
             <property name="javax.persistence.schema-generation.scripts.drop-target"
                       value="C:/tmp/sql/script-remocao-exportado.sql"/>
 
-            <!-- 			<property name="javax.persistence.schema-generation.scripts.action" value="drop-and-create" /> -->
-            <!-- 			<property name="javax.persistence.schema-generation.scripts.create-target" value="C:/Users/usuario/script-criacao.sql"/> -->
-            <!-- 			<property name="javax.persistence.schema-generation.scripts.drop-target" value="C:/Users/usuario/script-removao.sql"/> -->
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>
 
-            <property name="hibernate.dialect"
-                      value="org.hibernate.dialect.MySQL8Dialect"/>
+<!--            MULTITENANT-->
+            <property name="hibernate.multiTenancy" value="SCHEMA"/>
+            <property name="hibernate.tenant_identifier_resolver"
+                      value="com.algaworks.ecommerce.hibernate.EcmCurrentTenantIdentifierResolver"/>
+            <property name="hibernate.multi_tenant_connection_provider"
+                      value="com.algaworks.ecommerce.hibernate.EcmSchemaMultiTenantConnectionProvider"/>
 
+<!--            POOL DE CONEXÕES-->
+            <property name="hibernate.hikari.maximumPoolSize" value="16"/>
+            <property name="hibernate.connection.provider_class"
+                      value="org.hibernate.hikaricp.internal.HikariCPConnectionProvider"/>
+
+<!--            CACHE-->
+            <property name="hibernate.cache.region.factory_class"
+                      value="org.hibernate.cache.jcache.internal.JCacheRegionFactory"/>
+            <property name="hibernate.javax.cache.provider"
+                      value="org.ehcache.jsr107.EhcacheCachingProvider"/>
+            <property name="hibernate.javax.cache.uri" value="META-INF/ehcache.xml"/>
+
+<!--            FORMATAR SQL-->
             <property name="hibernate.show_sql" value="true"/>
-            <property name="hibernate.format_sql" value="true"/>
+            <property name="hibernate.format_sql" value="false"/>
         </properties>
     </persistence-unit>
 
