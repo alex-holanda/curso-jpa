@@ -1,6 +1,7 @@
 package com.algaworks.ecommerce.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -18,4 +19,7 @@ public class EntidadeBaseInteger {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+
+	@NotBlank
+	private String tenant;
 }
